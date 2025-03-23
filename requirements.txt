@@ -1,3 +1,5 @@
 pyvis
 matplotlib
 python-louvain
+pydot
+graphviz
