@@ -4,7 +4,7 @@ import matplotlib as mpl
 import community as com
 import csv
 
-attendees = {}
+attendees: dict[str, list[str]] = {}
 
 with open("attendees.csv") as attendees_csv:
     csv_reader = csv.reader(attendees_csv, delimiter=",")
