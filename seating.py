@@ -8,7 +8,7 @@ def main() -> None:
     # Reads the input file.
     with open(INPUT_FILE) as file:
         data = [
-            line.split("\t") for line in file.read().split("\n")[1:] if line != "\t\t"
+            line.split("\t") for line in file.read().split("\n") if line != "\t\t"
         ]
 
     # Gets all the nodes and edges, ignoring and removing 'N/A'.
@@ -29,7 +29,7 @@ def main() -> None:
         cdn_resources="remote",
         bgcolor="#222222",
         font_color=True,
-        height="720px",
+        height="1080px",
         width="100%",
         directed=True,
     )
