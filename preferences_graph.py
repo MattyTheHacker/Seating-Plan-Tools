@@ -7,9 +7,7 @@ INPUT_FILE = "data.tsv"
 def main() -> None:
     # Reads the input file.
     with open(INPUT_FILE) as file:
-        data = [
-            line.split("\t") for line in file.read().split("\n") if line != "\t\t"
-        ]
+        data = [line.split("\t") for line in file.read().split("\n") if line != "\t\t"]
 
     # Gets all the nodes and edges, ignoring and removing 'N/A'.
     confirmed_attendees: set[str] = set()
