@@ -34,7 +34,7 @@ nodes: nx.reportviews.NodeView = G.nodes()  # type: ignore[assignment]
 edge_labels: dict[tuple[str, str], int] = nx.get_edge_attributes(G, "weight")
 pos: dict[str, tuple[float, float]] = nx.nx_pydot.graphviz_layout(G)
 
-partition: dict[str, int] = com.best_partition(G.to_undirected(), resolution=0.16)
+partition: dict[str, int] = com.best_partition(G.to_undirected(), resolution=0.2)
 cmap: plt.Colormap = mpl.colormaps["hsv"]
 
 
