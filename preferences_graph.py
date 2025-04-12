@@ -16,7 +16,7 @@ def main() -> None:
         return
 
     with open(path) as file:
-        data = [line.split("\t") for line in file.read().split("\n") if line != "\t\t"]
+        data = [line.split(",") for line in file.read().split("\n") if line != ",,"]
 
     print(data)
 
