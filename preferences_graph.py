@@ -1,14 +1,10 @@
 from pyvis.network import Network  # type: ignore[import-untyped]
-from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 
 import webbrowser
 
-INPUT_FILE = "data.tsv"
-
 
 def main() -> None:
-    root = Tk().withdraw() # yeet that shit
     path: str = askopenfilename(
         title="Select the input file",
         filetypes=[("Tab-separated values", "*.tsv")],
