@@ -16,7 +16,7 @@ with open("attendees.csv") as attendees_csv:
             + ([] if (not row[13] or "N/A" in row[13]) else [row[13]])
         )
 
-G = nx.DiGraph()
+G: nx.DiGraph = nx.DiGraph()
 G.add_nodes_from(attendees.keys())
 
 for attendee, preferences in attendees.items():
@@ -30,11 +30,11 @@ for index, SG in enumerate(nx.connected_components(G.to_undirected())):
     print(SG)
 
 degrees = dict(G.degree)
-nodes: nx.reportviews.NodeView = G.nodes()
+nodes: nx.reportviews.NodeView = G.nodes()  # type: ignore[assignment]
 edge_labels: dict[tuple[str, str], int] = nx.get_edge_attributes(G, "weight")
 pos: dict[str, tuple[float, float]] = nx.nx_pydot.graphviz_layout(G)
 
-partition: dict[str, int] = com.best_partition(G.to_undirected(), resolution=0.2)
+partition: dict[str, int] = com.best_partition(G.to_undirected(), resolution=0.16)
 cmap: plt.Colormap = mpl.colormaps["hsv"]
 
 
@@ -49,7 +49,7 @@ nx.draw_networkx_nodes(
     pos=pos,
     nodelist=partition.keys(),
     cmap=cmap,
-    node_color=list(partition.values()),
+    node_color=list(partition.values()),  # type: ignore[arg-type]
     node_size=[100 + v * 100 for v in degrees.values()],
     alpha=0.8,
 )
@@ -79,5 +79,5 @@ for node, (x, y) in pos.items():
             fontsize=10,
         )
 
-plt.savefig("graph.png", dpi=300, bbox_inches="tight")
+plt.savefig("graphs/graph.png", dpi=300, bbox_inches="tight")
 plt.show()

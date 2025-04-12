@@ -42,11 +42,11 @@ def main() -> None:
         net.add_node(str(node), color="red")
 
     net.add_edges(edges)
-    net.show("graph.html")
+    net.show("graphs/graph.html")
 
     # Opens it.
     if input("Would you like to open the graph? (Y/N) >> ").lower() == "y":
-        webbrowser.open("graph.html")
+        webbrowser.open("grpahs/graph.html")
 
 
 if __name__ == "__main__":
