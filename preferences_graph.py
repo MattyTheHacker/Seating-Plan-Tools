@@ -7,7 +7,7 @@ import webbrowser
 def main() -> None:
     path: str = askopenfilename(
         title="Select the input file",
-        filetypes=[("Tab-separated values", "*.tsv")],
+        filetypes=[("Comma-separated values", "*.csv")],
         initialdir=".",
     )
 
