@@ -2,19 +2,8 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 import community as com
-import csv
 
-attendees: dict[str, list[str]] = {}
-
-with open("attendees.csv") as attendees_csv:
-    csv_reader = csv.reader(attendees_csv, delimiter=",")
-    next(csv_reader, None)
-    for row in csv_reader:
-        attendees[row[5]] = (
-            []
-            + ([] if (not row[12] or "N/A" in row[12]) else [row[12]])
-            + ([] if (not row[13] or "N/A" in row[13]) else [row[13]])
-        )
+from file_utils import attendees_and_preferences as attendees
 
 G: nx.DiGraph = nx.DiGraph()
 G.add_nodes_from(attendees.keys())
@@ -36,7 +25,6 @@ pos: dict[str, tuple[float, float]] = nx.nx_pydot.graphviz_layout(G)
 
 partition: dict[str, int] = com.best_partition(G.to_undirected(), resolution=0.2)
 cmap: plt.Colormap = mpl.colormaps["hsv"]
-
 
 plt.figure(figsize=(30, 30))
 plt.axis("off")
