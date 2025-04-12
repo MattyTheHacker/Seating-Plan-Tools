@@ -1,6 +1,5 @@
 .venv
 .mypy_cache
-attendees.csv
-data.tsv
+*.csv
 graph.html
 graph.png
