@@ -79,5 +79,5 @@ for node, (x, y) in pos.items():
             fontsize=10,
         )
 
-plt.savefig("graphs/graph.png", dpi=300, bbox_inches="tight")
+plt.savefig("graph.png", dpi=300, bbox_inches="tight")
 plt.show()

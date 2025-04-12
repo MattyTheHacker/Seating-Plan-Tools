@@ -1,13 +1,28 @@
 from pyvis.network import Network  # type: ignore[import-untyped]
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
+
 import webbrowser
 
 INPUT_FILE = "data.tsv"
 
 
 def main() -> None:
-    # Reads the input file.
-    with open(INPUT_FILE) as file:
+    root = Tk().withdraw() # yeet that shit
+    path: str = askopenfilename(
+        title="Select the input file",
+        filetypes=[("Tab-separated values", "*.tsv")],
+        initialdir=".",
+    )
+
+    if not path:
+        print("No file selected.")
+        return
+
+    with open(path) as file:
         data = [line.split("\t") for line in file.read().split("\n") if line != "\t\t"]
+
+    print(data)
 
     # Gets all the nodes and edges, ignoring and removing 'N/A'.
     confirmed_attendees: set[str] = set()
@@ -42,11 +57,11 @@ def main() -> None:
         net.add_node(str(node), color="red")
 
     net.add_edges(edges)
-    net.show("graphs/graph.html")
+    net.show("graph.html")
 
     # Opens it.
     if input("Would you like to open the graph? (Y/N) >> ").lower() == "y":
-        webbrowser.open("grpahs/graph.html")
+        webbrowser.open("graph.html")
 
 
 if __name__ == "__main__":
