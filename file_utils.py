@@ -9,7 +9,6 @@ def import_data() -> dict[str, list[str]]:
     attendees_and_preferences: dict[str, list[str]] = {}
     with open("data/attendees.csv") as attendees_csv:
         csv_reader = csv.DictReader(attendees_csv, delimiter=",")
-        next(csv_reader, None)
         for row in csv_reader:
             attendees_and_preferences[row["Name"]] = (
                 []
@@ -22,8 +21,6 @@ def import_data() -> dict[str, list[str]]:
             named_attendees.add(row["Seat Pref 2"]) if row["Seat Pref 2"] != "N/A" and row["Seat Pref 2"] not in named_attendees else None
             edges.append((row["Name"], row["Seat Pref 1"])) if row["Seat Pref 1"] != "N/A" else None
             edges.append((row["Name"], row["Seat Pref 2"])) if row["Seat Pref 2"] != "N/A" else None
-
-    print(attendees_and_preferences)
 
     return attendees_and_preferences
 
