@@ -1,10 +1,10 @@
 import csv
 
-
 food_attendees: set[str] = set()
 non_food_attendees: set[str] = set()
 named_attendees: set[str] = set()
 edges: list[tuple[str, str]] = []
+emails: dict[str, str] = {}  # Added: Dictionary to store emails
 
 def import_data() -> dict[str, list[str]]:
     attendees_and_preferences: dict[str, list[str]] = {}
@@ -13,6 +13,8 @@ def import_data() -> dict[str, list[str]]:
         for row in csv_reader:
             if not row["Name"]:
                 continue
+
+            emails[row["Name"]] = row["Contact Email"]
 
             attendees_and_preferences[row["Name"]] = (
                 []
@@ -29,5 +31,9 @@ def import_data() -> dict[str, list[str]]:
 
     return attendees_and_preferences
 
-
 attendees_and_preferences: dict[str, list[str]] = import_data()
+
+# Added: Calculate and print the unpurchased preference emails
+unpurchased_preferences = named_attendees - attendees_and_preferences.keys()
+target_emails = {emails[purchaser] for purchaser, pref in edges if pref in unpurchased_preferences}
+print("Emails of attendees whose preferences haven't purchased:", list(target_emails))
