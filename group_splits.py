@@ -1,7 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import matplotlib as mpl
-import community as com
+import community as com  # type: ignore
 
 from file_utils import attendees_and_preferences as attendees
 
